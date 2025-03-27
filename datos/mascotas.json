@@ -1,0 +1,10 @@
+[
+    {
+      "id": 1,
+      "nombre": "Max",
+      "tipo": "Perro",
+      "ubicacion": "Madrid",
+      "dueno_id": 1,
+      "cuidados_especiales":true
+    }
+  ]

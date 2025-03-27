@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PetMatch</title>
+</head>
+<body>
+    <h1>Encuentra mascotas compatibles</h1>
+
+    <div id="formulario-cuidador">
+        <h2>Tus datos</h2>
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" name="ubicacion" value="Sevilla"><br><br>
+
+        <label for="experiencia">Años de experiencia cuidando mascotas:</label>
+        <input type="number" id="experiencia" name="experiencia" value="3"><br><br>
+
+        <label for="acepta_perro">Acepto perros:</label>
+        <input type="checkbox" id="acepta_perro" name="acepta_perro" checked><br><br>
+
+        <label for="acepta_gato">Acepto gatos:</label>
+        <input type="checkbox" id="acepta_gato" name="acepta_gato"><br><br>
+
+        <button onclick="cargarCompatibles()">Buscar mascotas compatibles</button>
+    </div>
+
+    <h2>Mascotas compatibles</h2>
+    <div id="resultados"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+versión simplificada
+
+proyecto_mascotas/
+├── backend/       # Lógica en Python (API sencilla)
+│   ├── main.py    # Solo 1 archivo para empezar
+├── frontend/      # Interfaz básica en HTML/JS
+│   ├── index.html
+│   ├── app.js
+└── datos/         # "Base de datos" en JSON (¡sin Prisma al principio!)
+    ├── mascotas.json
+    ├── cuidadores.json
