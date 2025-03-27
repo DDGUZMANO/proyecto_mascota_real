@@ -7,6 +7,61 @@
     <h1>Encuentra mascotas compatibles</h1>
 
     <div id="formulario-cuidador">
+        <h2>Encuentra tu mascota ideal</h2>
+        <label for="ubicacion">Ubicación:</label>
+        <input type="text" id="ubicacion" name="ubicacion" value="Sevilla"><br><br>
+
+        <label for="experiencia">Años de experiencia cuidando mascotas:</label>
+        <input type="number" id="experiencia" name="experiencia" value="3"><br><br>
+
+        <label for="acepta_perro">Acepto perros:</label>
+        <input type="checkbox" id="acepta_perro" name="acepta_perro" checked><br><br>
+
+        <label for="acepta_gato">Acepto gatos:</label>
+        <input type="checkbox" id="acepta_gato" name="acepta_gato"><br><br>
+
+        <button onclick="cargarCompatibles()">Buscar mascotas compatibles</button>
+    </div>
+
+    <h2>Mascotas compatibles</h2>
+    <div id="resultados_mascotas"></div>
+
+    <hr>
+
+    <div id="formulario-mascota">
+        <h2>Encuentra el cuidador ideal para tu mascota</h2>
+        <label for="tipo_mascota">Tipo de mascota:</label>
+        <select id="tipo_mascota" name="tipo_mascota">
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
+            <option value="otro">Otro</option>
+        </select><br><br>
+
+        <label for="ubicacion_mascota">Ubicación de la mascota:</label>
+        <input type="text" id="ubicacion_mascota" name="ubicacion_mascota" value="Sevilla"><br><br>
+
+        <label for="necesidades_especiales_mascota">¿Tiene necesidades especiales?</label>
+        <input type="checkbox" id="necesidades_especiales_mascota" name="necesidades_especiales_mascota"><br><br>
+
+        <button onclick="cargarCuidadoresCompatibles()">Buscar cuidadores compatibles</button>
+    </div>
+
+    <h2>Cuidadores compatibles</h2>
+    <div id="resultados_cuidadores"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>PetMatch</title>
+</head>
+<body>
+    <h1>Encuentra mascotas compatibles</h1>
+
+    <div id="formulario-cuidador">
         <h2>Tus datos</h2>
         <label for="ubicacion">Ubicación:</label>
         <input type="text" id="ubicacion" name="ubicacion" value="Sevilla"><br><br>
@@ -28,4 +83,4 @@
 
     <script src="app.js"></script>
 </body>
-</html>
+</html>-->
