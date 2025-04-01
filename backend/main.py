@@ -2,9 +2,43 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS  # Importa Flask-CORS
 import json
 from pathlib import Path
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 CORS(app)  # Habilita CORS para toda la aplicación
+
+# --- Configuración de la Base de Datos PostgreSQL ---
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:douguzman29@localhost/petmatch'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Cuidador(db.Model):
+    __tablename__ = 'cuidadores'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(80), nullable=False)
+    ubicacion = db.Column(db.String(80), nullable=False)
+    experiencia = db.Column(db.Integer)
+    acepta_perro = db.Column(db.Boolean)
+    acepta_gato = db.Column(db.Boolean)
+    # Puedes añadir más campos si los tienes en tu JSON
+    # Ejemplo: contacto = db.Column(db.String(120))
+
+    def __repr__(self):
+        return f'<Cuidador {self.nombre}>'
+
+class Mascota(db.Model):
+    __tablename__ = 'mascotas'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(80), nullable=False)
+    tipo = db.Column(db.String(20), nullable=False)
+    ubicacion = db.Column(db.String(80), nullable=False)
+    necesidades_especiales = db.Column(db.Boolean)
+    # Puedes añadir más campos si los tienes en tu JSON
+    # Ejemplo: raza = db.Column(db.String(50))
+
+    def __repr__(self):
+        return f'<Mascota {self.nombre}>'
 
 # Ruta para la página principal (opcional, puede que ya la tengas)
 @app.route('/')
@@ -177,5 +211,8 @@ def home():
     return "API de PetMatch - Usa /cuidadores, /mascotas o /compatibilidad"
 
 if __name__ == '__main__':
+    # Crea las tablas de la base de datos (solo la primera vez)
+    #with app.app_context():
+       # db.create_all()
     app.run(debug=True)
 
