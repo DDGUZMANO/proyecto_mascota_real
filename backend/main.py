@@ -39,6 +39,58 @@ class Mascota(db.Model):
 
     def __repr__(self):
         return f'<Mascota {self.nombre}>'
+    
+def poblar_base_de_datos():
+    with app.app_context():
+        db.create_all()
+
+        # Eliminar todos los cuidadores existentes
+        db.session.query(Cuidador).delete()
+
+        # Eliminar todas las mascotas existentes
+        db.session.query(Mascota).delete()
+
+        cuidadores_data = [
+            {"id": 1, "nombre": "Carlos", "acepta_perro": True, "ubicacion": "Madrid", "experiencia": 3, "acepta_gato": False},
+            {"id": 2, "nombre": "Ana", "acepta_perro": False, "ubicacion": "Barcelona", "experiencia": 5, "acepta_gato": True},
+            {"id": 3, "nombre": "Pedro", "acepta_perro": True, "ubicacion": "Valencia", "experiencia": 2, "acepta_gato": True},
+            {"id": 4, "nombre": "Sofía", "acepta_perro": True, "ubicacion": "Madrid", "experiencia": 4, "acepta_gato": False},
+            {"id": 5, "nombre": "Javier", "acepta_perro": False, "ubicacion": "Barcelona", "experiencia": 1, "acepta_gato": True},
+            {"id": 6, "nombre": "Lucía", "acepta_perro": True, "ubicacion": "Sevilla", "experiencia": 3, "acepta_gato": True},
+        ]
+        for cuidador_info in cuidadores_data:
+            cuidador = Cuidador(
+                id=cuidador_info.get("id"),
+                nombre=cuidador_info.get("nombre"),
+                acepta_perro=cuidador_info.get("acepta_perro"),
+                ubicacion=cuidador_info.get("ubicacion"),
+                experiencia=cuidador_info.get("experiencia"),
+                acepta_gato=cuidador_info.get("acepta_gato", False),
+            )
+            db.session.add(cuidador)
+
+        mascotas_data = [
+            {"id": 1, "nombre": "Max", "tipo": "Perro", "ubicacion": "Madrid", "cuidados_especiales": True},
+            {"id": 2, "nombre": "Luna", "tipo": "Gato", "ubicacion": "Barcelona", "cuidados_especiales": False},
+            {"id": 3, "nombre": "Rocky", "tipo": "Perro", "ubicacion": "Valencia", "cuidados_especiales": False},
+            {"id": 4, "nombre": "Misha", "tipo": "Perro", "ubicacion": "Madrid", "cuidados_especiales": False},
+            {"id": 5, "nombre": "Simba", "tipo": "Gato", "ubicacion": "Barcelona", "cuidados_especiales": True},
+            {"id": 6, "nombre": "Lola", "tipo": "Gato", "ubicacion": "Sevilla", "cuidados_especiales": False},
+            {"id": 7, "nombre": "Buddy", "tipo": "Perro", "ubicacion": "Madrid", "cuidados_especiales": False},
+            {"id": 8, "nombre": "Cleo", "tipo": "Gato", "ubicacion": "Valencia", "cuidados_especiales": False},
+        ]
+        for mascota_info in mascotas_data:
+            mascota = Mascota(
+                id=mascota_info.get("id"),
+                nombre=mascota_info.get("nombre"),
+                tipo=mascota_info.get("tipo"),
+                ubicacion=mascota_info.get("ubicacion"),
+                necesidades_especiales=mascota_info.get("cuidados_especiales", False),
+            )
+            db.session.add(mascota)
+
+        db.session.commit()
+        print("¡Base de datos poblada con más datos de JSON!")
 
 # Ruta para la página principal (opcional, puede que ya la tengas)
 @app.route('/')
@@ -210,9 +262,9 @@ def encontrar_cuidadores_compatibles():
 def home():
     return "API de PetMatch - Usa /cuidadores, /mascotas o /compatibilidad"
 
-if __name__ == '__main__':
-    # Crea las tablas de la base de datos (solo la primera vez)
-    #with app.app_context():
-       # db.create_all()
-    app.run(debug=True)
 
+if __name__ == '__main__':
+    with app.app_context():
+        # poblar_base_de_datos() # Comenta esta línea
+        pass
+    app.run(debug=True)
