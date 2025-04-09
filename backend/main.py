@@ -40,6 +40,10 @@ class Mascota(db.Model):
     def __repr__(self):
         return f'<Mascota {self.nombre}>'
     
+
+# esta seccion se hace para poblar la base de datos, con datos de prueba, una poblacion inicial, cuando
+# ya se ha iniciado la aplicacion, no tiene ningun efecto siempre y cuando la llamada a la funcion este
+# comentada en __name__='__main__'    
 def poblar_base_de_datos():
     with app.app_context():
         db.create_all()
