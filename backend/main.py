@@ -231,11 +231,34 @@ def generar_salida_usuario_cuidadores(resultados_mascota, base_de_datos_cuidador
 # --- Rutas de la API ---
 @app.route('/cuidadores')
 def listar_cuidadores():
-    return jsonify(cargar_datos("cuidadores"))
+    cuidadores = Cuidador.query.all()
+    cuidadores_lista = []
+    for cuidador in cuidadores:
+        cuidador_data = {
+            'id': cuidador.id,
+            'nombre': cuidador.nombre,
+            'ubicacion': cuidador.ubicacion,
+            'experiencia': cuidador.experiencia,
+            'acepta_perro': cuidador.acepta_perro,
+            'acepta_gato': cuidador.acepta_gato
+        }
+        cuidadores_lista.append(cuidador_data)
+    return jsonify(cuidadores_lista)
 
 @app.route('/mascotas')
 def listar_mascotas():
-    return jsonify(cargar_datos("mascotas"))
+    mascotas = Mascota.query.all()
+    mascotas_lista = []
+    for mascota in mascotas:
+        mascota_data = {
+            'id': mascota.id,
+            'nombre': mascota.nombre,
+            'tipo': mascota.tipo,
+            'ubicacion': mascota.ubicacion,
+            'necesidades_especiales': mascota.necesidades_especiales
+        }
+        mascotas_lista.append(mascota_data)
+    return jsonify(mascotas_lista)
 
 @app.route('/compatibilidad', methods=['POST'])
 def calcular_compatibilidad():
